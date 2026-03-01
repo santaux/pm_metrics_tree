@@ -130,6 +130,9 @@
     // Initial render
     update(root);
 
+    // Show North Star details by default
+    showPanel(root.data);
+
     // Fit after transition completes (duration = 320ms)
     setTimeout(() => fitView(wrapper.clientWidth, wrapper.clientHeight), 440);
 
@@ -483,18 +486,15 @@
 
   // ── Detail Panel ─────────────────────────────────────────────
   function bindPanel() {
-    document.getElementById('panel-close').addEventListener('click', closePanel);
-
-    // Click on SVG background closes panel
+    // Click on SVG background resets panel to North Star
     document.getElementById('tree-svg').addEventListener('click', () => {
-      closePanel();
       activeNode = null;
       update(root);
+      showPanel(root.data);
     });
   }
 
   function showPanel(data) {
-    const panel   = document.getElementById('detail-panel');
     const content = document.getElementById('panel-content');
     const color   = CAT_COLORS[data.category] || '#26d15f';
     const bg      = CAT_BG[data.category]    || 'rgba(38,209,95,0.14)';
@@ -562,14 +562,11 @@
       ${sections.join('')}
     `;
 
-    panel.classList.add('open');
-    // Scroll to top of panel content
-    document.getElementById('panel-content').scrollTop = 0;
+    content.scrollTop = 0;
   }
 
   function closePanel() {
-    const panel = document.getElementById('detail-panel');
-    panel.classList.remove('open');
+    if (root) showPanel(root.data);
   }
 
   // ── Utilities ─────────────────────────────────────────────────

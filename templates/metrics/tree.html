@@ -27,50 +27,49 @@
 </section>
 
 <div class="tree-layout">
-  <!-- Tree controls -->
-  <div class="tree-controls">
-    <button class="ctrl-btn" id="btn-expand-all" title="Expand all">⊞ Expand All</button>
-    <button class="ctrl-btn" id="btn-collapse-all" title="Collapse all">⊟ Collapse All</button>
-    <button class="ctrl-btn" id="btn-reset-view" title="Fit to screen">⌖ Fit View</button>
-    <div class="ctrl-sep"></div>
-    <button class="ctrl-btn-icon" id="btn-zoom-in" title="Zoom in">+</button>
-    <button class="ctrl-btn-icon" id="btn-zoom-out" title="Zoom out">&minus;</button>
-    <div class="ctrl-sep"></div>
-    <div class="ctrl-nav-group">
-      <button class="ctrl-btn-icon" id="btn-nav-left" title="Pan left">&#8592;</button>
-      <button class="ctrl-btn-icon" id="btn-nav-up" title="Pan up">&#8593;</button>
-      <button class="ctrl-btn-icon" id="btn-nav-down" title="Pan down">&#8595;</button>
-      <button class="ctrl-btn-icon" id="btn-nav-right" title="Pan right">&#8594;</button>
+  <!-- Left: Tree -->
+  <div class="tree-left">
+    <div class="tree-controls">
+      <button class="ctrl-btn" id="btn-expand-all" title="Expand all">⊞ Expand All</button>
+      <button class="ctrl-btn" id="btn-collapse-all" title="Collapse all">⊟ Collapse All</button>
+      <button class="ctrl-btn" id="btn-reset-view" title="Fit to screen">⌖ Fit View</button>
+      <div class="ctrl-sep"></div>
+      <button class="ctrl-btn-icon" id="btn-zoom-in" title="Zoom in">+</button>
+      <button class="ctrl-btn-icon" id="btn-zoom-out" title="Zoom out">&minus;</button>
+      <div class="ctrl-sep"></div>
+      <div class="ctrl-nav-group">
+        <button class="ctrl-btn-icon" id="btn-nav-left" title="Pan left">&#8592;</button>
+        <button class="ctrl-btn-icon" id="btn-nav-up" title="Pan up">&#8593;</button>
+        <button class="ctrl-btn-icon" id="btn-nav-down" title="Pan down">&#8595;</button>
+        <button class="ctrl-btn-icon" id="btn-nav-right" title="Pan right">&#8594;</button>
+      </div>
+      <div class="ctrl-sep"></div>
+      <span class="ctrl-hint">Click a node to expand &amp; explore · Scroll to zoom</span>
     </div>
-    <div class="ctrl-sep"></div>
-    <span class="ctrl-hint">Click a node to expand &amp; explore · Scroll to zoom</span>
+    <div class="tree-wrapper" id="tree-wrapper">
+      <svg id="tree-svg">
+        <defs>
+          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.4)" flood-opacity="1"/>
+          </filter>
+          <filter id="shadow-strong" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.6)" flood-opacity="1"/>
+          </filter>
+        </defs>
+        <g id="tree-root-g"></g>
+      </svg>
+    </div>
   </div>
 
-  <!-- SVG tree canvas -->
-  <div class="tree-wrapper" id="tree-wrapper">
-    <svg id="tree-svg">
-      <defs>
-        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.4)" flood-opacity="1"/>
-        </filter>
-        <filter id="shadow-strong" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.6)" flood-opacity="1"/>
-        </filter>
-      </defs>
-      <g id="tree-root-g"></g>
-    </svg>
-  </div>
-
-  <!-- Detail panel -->
-  <aside class="detail-panel" id="detail-panel">
-    <button class="panel-close" id="panel-close" aria-label="Close">✕</button>
+  <!-- Right: Detail panel (always visible) -->
+  <div class="detail-panel" id="detail-panel">
     <div class="panel-content" id="panel-content">
       <div class="panel-empty">
-        <div class="panel-empty-icon">👆</div>
-        <p>Click any metric node<br>to see its full details here</p>
+        <div class="panel-empty-icon">⏳</div>
+        <p>Loading…</p>
       </div>
     </div>
-  </aside>
+  </div>
 </div>
 
 <section class="examples-section">
@@ -115,6 +114,11 @@
           <span class="example-metric-val">MRR from Premium subs, ad RPM for free tier</span>
         </div>
       </div>
+      <button class="example-toggle">See how it works ↓</button>
+      <div class="example-expanded">
+        <p>Spotify places <strong>Monthly Active Streamers</strong> at the top because listening time is the clearest signal of value delivered. The tree flows top-down: paid and organic Growth feeds new users; Activation fires when a user creates their first playlist or opens Discover Weekly — signaling the algorithm has connected them with music they love. Retention is driven by personalization quality: users who feel &ldquo;understood&rdquo; by recommendations renew at significantly higher rates. Engagement (DAU/MAU) determines ad-tier revenue, while Premium MRR grows when listening becomes an indispensable daily habit. Notably, podcast listeners show 2× higher retention than music-only users — a single Engagement metric cascading into Revenue.</p>
+        <a class="example-source-link" href="https://newsroom.spotify.com/" target="_blank" rel="noopener">→ Spotify Newsroom &amp; Investor Reports</a>
+      </div>
     </div>
 
     <!-- Airbnb -->
@@ -151,6 +155,11 @@
           <span class="example-metric-cat" style="background:rgba(6,182,212,0.14);color:#06b6d4">Satisfaction</span>
           <span class="example-metric-val">Host/guest NPS, review response rate, dispute rate</span>
         </div>
+      </div>
+      <button class="example-toggle">See how it works ↓</button>
+      <div class="example-expanded">
+        <p><strong>Nights Booked</strong> sits at the intersection of a two-sided marketplace: it only grows if both supply (hosts listing quality properties) and demand (guests finding and trusting the platform) are healthy simultaneously. The metrics tree therefore branches into host-side and guest-side at the second level. The critical insight is that <strong>Quality metrics feed directly into Revenue</strong>: hosts with higher review scores appear higher in search, get more bookings, and earn more. Airbnb&rsquo;s data science team standardized all product tradeoff decisions by computing each change&rsquo;s long-term impact on Nights Booked — a process described in their engineering blog.</p>
+        <a class="example-source-link" href="https://medium.com/airbnb-engineering/how-airbnb-measures-future-value-to-standardize-tradeoffs-3aa99a941ba5" target="_blank" rel="noopener">→ Airbnb Engineering: Measuring Future Value</a>
       </div>
     </div>
 
@@ -189,6 +198,11 @@
           <span class="example-metric-val">Paid seat conversion %, Expansion MRR, Net Revenue Retention</span>
         </div>
       </div>
+      <button class="example-toggle">See how it works ↓</button>
+      <div class="example-expanded">
+        <p>Slack discovered through cohort analysis that workspaces sending <strong>2,000 messages were retained at dramatically higher rates</strong> — this &ldquo;magic number&rdquo; became their activation threshold. Their metrics tree has an unusually strong viral loop: each user invited to a workspace is simultaneously a Growth and Activation event, making K-factor a leading indicator tracked weekly. For Revenue, Slack tracks <strong>seat expansion within accounts</strong> as the primary signal that the product is spreading organically inside organizations — a metric that sits uniquely between Retention and Revenue in their tree. Net Revenue Retention above 130% is how they demonstrate that Expansion MRR outpaces churn.</p>
+        <a class="example-source-link" href="https://review.firstround.com/From-0-to-1B-Slacks-Founding-Story-and-the-Essential-Advice-of-Its-Investors/" target="_blank" rel="noopener">→ First Round Review: Slack&rsquo;s Founding Story</a>
+      </div>
     </div>
 
     <!-- Duolingo -->
@@ -225,6 +239,11 @@
           <span class="example-metric-cat" style="background:rgba(236,72,153,0.14);color:#ec4899">Revenue</span>
           <span class="example-metric-val">Super Duolingo CVR, subscription LTV, in-app purchase rate</span>
         </div>
+      </div>
+      <button class="example-toggle">See how it works ↓</button>
+      <div class="example-expanded">
+        <p>Duolingo&rsquo;s growth team rebuilt their entire product model around <strong>DAU as the North Star</strong>, after discovering that streak maintenance was the single biggest driver. When they introduced Streak Freeze (which preserves a streak if a user misses a day), DAU rose significantly without any new content. Their tree shows a tight feedback loop: <strong>Engagement (streak length) → Retention (D7/D30) → DAU</strong>. For Revenue, they found that users with streaks longer than 10 days convert to Super Duolingo at 3× the rate of new users — a textbook example of how a single Engagement metric becomes a direct Revenue lever. The Duolingo blog published a detailed breakdown of this model.</p>
+        <a class="example-source-link" href="https://blog.duolingo.com/growth-model-duolingo/" target="_blank" rel="noopener">→ Duolingo Blog: Our Growth Model</a>
       </div>
     </div>
 
@@ -263,6 +282,11 @@
           <span class="example-metric-val">Team plan conversion %, seats per org, Net Revenue Retention</span>
         </div>
       </div>
+      <button class="example-toggle">See how it works ↓</button>
+      <div class="example-expanded">
+        <p>Figma&rsquo;s PLG (product-led growth) model makes <strong>collaboration the growth engine</strong> itself. Every shared file link is a free acquisition channel — the recipient must sign up to view or edit, making Growth and Activation tightly coupled. The &ldquo;aha moment&rdquo; is the first <strong>collaborative editing session</strong> with another user: when teams edit together in real time, they experience the full product value and become far more likely to convert to paid. Figma tracks <strong>organizations with 2+ active editors</strong> as their primary Revenue expansion signal — a unique metric that sits between Engagement and Revenue in their tree. Once a team reaches that threshold, seat expansion is near-inevitable.</p>
+        <a class="example-source-link" href="https://www.figma.com/blog/how-figmas-multiplayer-technology-works/" target="_blank" rel="noopener">→ Figma Blog: How Multiplayer Works</a>
+      </div>
     </div>
 
   </div>
@@ -292,4 +316,14 @@
 {% block extra_scripts %}
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="{% static 'js/metrics_tree.js' %}"></script>
+<script>
+  document.querySelectorAll('.example-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var card = this.closest('.example-card');
+      var isOpen = card.classList.toggle('is-open');
+      this.textContent = isOpen ? 'Close ↑' : 'See how it works ↓';
+    });
+  });
+</script>
 {% endblock %}
