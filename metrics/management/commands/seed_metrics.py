@@ -20,16 +20,16 @@ def create_node(data, parent=None):
 
 
 TREE = {
-    'name': 'Product Health',
-    'icon': '🌳',
+    'name': 'North Star',
+    'icon': '⭐',
     'category': 'root',
     'is_group': True,
     'order': 0,
-    'short_description': 'Composite view of how your product is doing across all pillars.',
-    'full_description': 'Product Health is the combined view of Growth, Activation, Retention, Engagement, Revenue, Satisfaction, and Quality. No single metric tells the full story — PMs must track all pillars simultaneously to avoid local maxima and find the real constraint on business growth.',
-    'formula': '',
-    'why_it_matters': 'PMs who optimize one metric often mask underlying problems. Monthly cross-pillar reviews prevent tunnel vision.',
-    'how_to_improve': 'Hold a monthly Product Health Review. Identify the weakest pillar and prioritize it for the quarter.',
+    'short_description': 'The single metric that best captures the core value your product delivers to users.',
+    'full_description': 'The North Star Metric (NSM) is the one number that best reflects the value your product delivers — and is most predictive of long-term business success. It sits at the top of the metrics tree and is supported by all downstream pillars: Growth, Activation, Retention, Engagement, Revenue, Satisfaction, and Quality. Examples: Spotify → Monthly Active Streamers, Airbnb → Nights Booked, Slack → Messages Sent per Active User, Duolingo → Daily Active Learners.',
+    'formula': 'Varies by product. Choose the metric that best answers: "If this number grows, are we delivering more value to more users?"',
+    'why_it_matters': 'Without a clear North Star, teams optimize local metrics at the expense of the whole. The NSM aligns PMs, engineers, designers, and business stakeholders on what truly matters — making it the foundation for all OKRs and roadmap decisions.',
+    'how_to_improve': 'Choose a metric that reflects user value, not just revenue. Break it into its drivers using this tree. Run monthly cross-pillar reviews to find the weakest link constraining your North Star.',
     'benchmark': '',
     'children': [
         # ─── GROWTH ────────────────────────────────────────────────────────────

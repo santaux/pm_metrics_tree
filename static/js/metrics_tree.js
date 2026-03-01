@@ -106,9 +106,9 @@
     // D3 hierarchy
     root = d3.hierarchy(rawData, d => d.children);
 
-    // Start with depth-1 nodes collapsed (only root + pillars open)
+    // Collapse everything except root
     root.descendants().forEach(d => {
-      if (d.depth > 1) {
+      if (d.depth > 0) {
         d._children = d.children;
         d.children  = null;
       }
@@ -119,9 +119,10 @@
       .nodeSize([NODE_HEIGHT + V_GAP, NODE_WIDTH + H_GAP])
       .separation((a, b) => (a.parent === b.parent ? 1 : 1.4));
 
-    // Zoom & pan
+    // Zoom — wheel only (no mouse-drag pan)
     zoom = d3.zoom()
-      .scaleExtent([0.15, 2.5])
+      .filter(event => event.type === 'wheel' || event.type === 'touchstart' || event.type === 'touchmove')
+      .scaleExtent([0.1, 3])
       .on('zoom', e => gMain.attr('transform', e.transform));
 
     svg.call(zoom);
@@ -356,6 +357,12 @@
     activeNode = d;
     update(d);
 
+    // Auto-fit after transition
+    setTimeout(() => {
+      const wrapper = document.getElementById('tree-wrapper');
+      fitView(wrapper.clientWidth, wrapper.clientHeight);
+    }, 440);
+
     // Show detail panel
     showPanel(d.data);
   }
@@ -425,12 +432,18 @@
   }
 
   // ── Controls ─────────────────────────────────────────────────
+  const ZOOM_STEP = 1.35;
+  const PAN_STEP  = 120;
+
   function bindControls() {
+    const wrapper = () => document.getElementById('tree-wrapper');
+
     document.getElementById('btn-expand-all').addEventListener('click', () => {
       root.descendants().forEach(d => {
         if (d._children) { d.children = d._children; d._children = null; }
       });
       update(root);
+      setTimeout(() => fitView(wrapper().clientWidth, wrapper().clientHeight), 440);
     });
 
     document.getElementById('btn-collapse-all').addEventListener('click', () => {
@@ -438,11 +451,33 @@
         if (d.depth > 0 && d.children) { d._children = d.children; d.children = null; }
       });
       update(root);
+      setTimeout(() => fitView(wrapper().clientWidth, wrapper().clientHeight), 440);
     });
 
     document.getElementById('btn-reset-view').addEventListener('click', () => {
-      const wrapper = document.getElementById('tree-wrapper');
-      fitView(wrapper.clientWidth, wrapper.clientHeight);
+      fitView(wrapper().clientWidth, wrapper().clientHeight);
+    });
+
+    // Zoom in / out
+    document.getElementById('btn-zoom-in').addEventListener('click', () => {
+      svg.transition().duration(280).call(zoom.scaleBy, ZOOM_STEP);
+    });
+    document.getElementById('btn-zoom-out').addEventListener('click', () => {
+      svg.transition().duration(280).call(zoom.scaleBy, 1 / ZOOM_STEP);
+    });
+
+    // Directional pan
+    document.getElementById('btn-nav-up').addEventListener('click', () => {
+      svg.transition().duration(200).call(zoom.translateBy, 0, PAN_STEP);
+    });
+    document.getElementById('btn-nav-down').addEventListener('click', () => {
+      svg.transition().duration(200).call(zoom.translateBy, 0, -PAN_STEP);
+    });
+    document.getElementById('btn-nav-left').addEventListener('click', () => {
+      svg.transition().duration(200).call(zoom.translateBy, PAN_STEP, 0);
+    });
+    document.getElementById('btn-nav-right').addEventListener('click', () => {
+      svg.transition().duration(200).call(zoom.translateBy, -PAN_STEP, 0);
     });
   }
 

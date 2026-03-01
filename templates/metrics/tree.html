@@ -31,9 +31,19 @@
   <div class="tree-controls">
     <button class="ctrl-btn" id="btn-expand-all" title="Expand all">⊞ Expand All</button>
     <button class="ctrl-btn" id="btn-collapse-all" title="Collapse all">⊟ Collapse All</button>
-    <button class="ctrl-btn" id="btn-reset-view" title="Reset zoom">⌖ Reset View</button>
+    <button class="ctrl-btn" id="btn-reset-view" title="Fit to screen">⌖ Fit View</button>
     <div class="ctrl-sep"></div>
-    <span class="ctrl-hint">Click a node to explore · Scroll to zoom · Drag to pan</span>
+    <button class="ctrl-btn-icon" id="btn-zoom-in" title="Zoom in">+</button>
+    <button class="ctrl-btn-icon" id="btn-zoom-out" title="Zoom out">&minus;</button>
+    <div class="ctrl-sep"></div>
+    <div class="ctrl-nav-group">
+      <button class="ctrl-btn-icon" id="btn-nav-left" title="Pan left">&#8592;</button>
+      <button class="ctrl-btn-icon" id="btn-nav-up" title="Pan up">&#8593;</button>
+      <button class="ctrl-btn-icon" id="btn-nav-down" title="Pan down">&#8595;</button>
+      <button class="ctrl-btn-icon" id="btn-nav-right" title="Pan right">&#8594;</button>
+    </div>
+    <div class="ctrl-sep"></div>
+    <span class="ctrl-hint">Click a node to expand &amp; explore · Scroll to zoom</span>
   </div>
 
   <!-- SVG tree canvas -->
@@ -62,6 +72,201 @@
     </div>
   </aside>
 </div>
+
+<section class="examples-section">
+  <div class="examples-header">
+    <h2>How Real Products Use This Framework</h2>
+    <p>Every successful product team tracks a different slice of this tree. Here's how five well-known products map their key metrics to the same pillars.</p>
+  </div>
+  <div class="example-cards">
+
+    <!-- Spotify -->
+    <div class="example-card">
+      <div class="example-top">
+        <div class="example-emoji">🎵</div>
+        <div class="example-meta">
+          <div class="example-company">Spotify</div>
+          <div class="example-type">Audio Streaming · B2C SaaS</div>
+        </div>
+      </div>
+      <div class="example-ns">
+        <span class="example-ns-label">North Star</span>
+        <span class="example-ns-value">Monthly Active Streamers (time spent listening)</span>
+      </div>
+      <div class="example-metrics">
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(38,209,95,0.14);color:#26d15f">Growth</span>
+          <span class="example-metric-val">Free-to-Premium conversion rate, new subscriber CAC</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(59,130,246,0.14);color:#3b82f6">Activation</span>
+          <span class="example-metric-val">First playlist created, Discover Weekly opened</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(139,92,246,0.14);color:#8b5cf6">Retention</span>
+          <span class="example-metric-val">D30 active streamer rate, Premium renewal rate</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(245,158,11,0.14);color:#f59e0b">Engagement</span>
+          <span class="example-metric-val">DAU/MAU stickiness, avg session duration, podcasts/week</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(236,72,153,0.14);color:#ec4899">Revenue</span>
+          <span class="example-metric-val">MRR from Premium subs, ad RPM for free tier</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Airbnb -->
+    <div class="example-card">
+      <div class="example-top">
+        <div class="example-emoji">🏠</div>
+        <div class="example-meta">
+          <div class="example-company">Airbnb</div>
+          <div class="example-type">Travel Marketplace · Two-sided</div>
+        </div>
+      </div>
+      <div class="example-ns">
+        <span class="example-ns-label">North Star</span>
+        <span class="example-ns-value">Nights Booked (gross booking value)</span>
+      </div>
+      <div class="example-metrics">
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(38,209,95,0.14);color:#26d15f">Growth</span>
+          <span class="example-metric-val">New host sign-ups, SEO-driven traveler traffic, sign-up CVR</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(59,130,246,0.14);color:#3b82f6">Activation</span>
+          <span class="example-metric-val">First booking completed, host first listing published</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(139,92,246,0.14);color:#8b5cf6">Retention</span>
+          <span class="example-metric-val">Guest 90-day re-booking rate, host annual listing renewal</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(236,72,153,0.14);color:#ec4899">Revenue</span>
+          <span class="example-metric-val">GBV, take rate (~15%), Revenue per Night Booked</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(6,182,212,0.14);color:#06b6d4">Satisfaction</span>
+          <span class="example-metric-val">Host/guest NPS, review response rate, dispute rate</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slack -->
+    <div class="example-card">
+      <div class="example-top">
+        <div class="example-emoji">💬</div>
+        <div class="example-meta">
+          <div class="example-company">Slack</div>
+          <div class="example-type">B2B Collaboration SaaS</div>
+        </div>
+      </div>
+      <div class="example-ns">
+        <span class="example-ns-label">North Star</span>
+        <span class="example-ns-value">Messages sent per connected user per week</span>
+      </div>
+      <div class="example-metrics">
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(38,209,95,0.14);color:#26d15f">Growth</span>
+          <span class="example-metric-val">Workspace sign-ups, K-factor (invites sent per workspace)</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(59,130,246,0.14);color:#3b82f6">Activation</span>
+          <span class="example-metric-val">&ldquo;Aha moment&rdquo;: 2,000 messages sent in a workspace</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(139,92,246,0.14);color:#8b5cf6">Retention</span>
+          <span class="example-metric-val">Monthly workspace retention, seat expansion within accounts</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(245,158,11,0.14);color:#f59e0b">Engagement</span>
+          <span class="example-metric-val">DAU/MAU, threads/user, Huddle &amp; app integration usage</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(236,72,153,0.14);color:#ec4899">Revenue</span>
+          <span class="example-metric-val">Paid seat conversion %, Expansion MRR, Net Revenue Retention</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duolingo -->
+    <div class="example-card">
+      <div class="example-top">
+        <div class="example-emoji">🦉</div>
+        <div class="example-meta">
+          <div class="example-company">Duolingo</div>
+          <div class="example-type">Consumer EdTech · Freemium</div>
+        </div>
+      </div>
+      <div class="example-ns">
+        <span class="example-ns-label">North Star</span>
+        <span class="example-ns-value">Daily Active Learners (DAU)</span>
+      </div>
+      <div class="example-metrics">
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(38,209,95,0.14);color:#26d15f">Growth</span>
+          <span class="example-metric-val">App install CVR, referral sign-ups, social loop reach</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(59,130,246,0.14);color:#3b82f6">Activation</span>
+          <span class="example-metric-val">Day-3 streak started (first habit signal), first crown earned</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(139,92,246,0.14);color:#8b5cf6">Retention</span>
+          <span class="example-metric-val">D1/D7/D30 retention, streak continuation &amp; recovery rate</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(245,158,11,0.14);color:#f59e0b">Engagement</span>
+          <span class="example-metric-val">Lessons/day, avg streak length, league competition participation</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(236,72,153,0.14);color:#ec4899">Revenue</span>
+          <span class="example-metric-val">Super Duolingo CVR, subscription LTV, in-app purchase rate</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Figma -->
+    <div class="example-card">
+      <div class="example-top">
+        <div class="example-emoji">🎨</div>
+        <div class="example-meta">
+          <div class="example-company">Figma</div>
+          <div class="example-type">B2B Design SaaS · PLG</div>
+        </div>
+      </div>
+      <div class="example-ns">
+        <span class="example-ns-label">North Star</span>
+        <span class="example-ns-value">Weekly collaborative editing sessions</span>
+      </div>
+      <div class="example-metrics">
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(38,209,95,0.14);color:#26d15f">Growth</span>
+          <span class="example-metric-val">Organic sign-ups from shared file links, education plan CVR</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(59,130,246,0.14);color:#3b82f6">Activation</span>
+          <span class="example-metric-val">First collaborative edit with another user (PQL signal)</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(139,92,246,0.14);color:#8b5cf6">Retention</span>
+          <span class="example-metric-val">D30 returning editors, file-sharing frequency per user</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(245,158,11,0.14);color:#f59e0b">Engagement</span>
+          <span class="example-metric-val">Avg editor time/week, prototype views, comments per file</span>
+        </div>
+        <div class="example-metric-row">
+          <span class="example-metric-cat" style="background:rgba(236,72,153,0.14);color:#ec4899">Revenue</span>
+          <span class="example-metric-val">Team plan conversion %, seats per org, Net Revenue Retention</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <section class="info-section">
   <div class="info-inner">
