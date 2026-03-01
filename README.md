@@ -40,26 +40,106 @@ python manage.py seed_metrics
 
 This clears all existing nodes and re-creates them from `metrics/management/commands/seed_metrics.py`.
 
+---
+
+## Deploying to GitHub Pages
+
+The app can be exported as a fully self-contained static site (no server required) and hosted for free on GitHub Pages.
+
+### Step 1 — Export the static site
+
+**Option A — Management command (terminal):**
+
+```bash
+# Make sure the Django server is NOT required — export reads the DB directly
+python manage.py export_static
+```
+
+This generates a `docs/` folder in the project root:
+
+```
+docs/
+├── index.html          ← fully self-contained page with embedded tree data
+└── static/
+    ├── css/styles.css
+    └── js/metrics_tree.js
+```
+
+**Option B — Django Admin button:**
+
+1. Open `http://127.0.0.1:8000/admin/`
+2. Go to **Metrics → Metric nodes**
+3. Click the green **"⬇ Export for GitHub Pages"** button at the top right
+4. A success message confirms the `docs/` folder was written
+
+> Re-run the export any time you update metrics in the Admin — then commit and push.
+
+---
+
+### Step 2 — Push to GitHub
+
+```bash
+git add docs/
+git commit -m "chore: update GitHub Pages export"
+git push origin main
+```
+
+---
+
+### Step 3 — Enable GitHub Pages
+
+1. Open your repository on GitHub
+2. Go to **Settings → Pages**
+3. Under **Build and deployment → Source**, select **Deploy from a branch**
+4. Set **Branch** to `main` (or your default branch) and **Folder** to `/docs`
+5. Click **Save**
+
+GitHub will publish your site at:
+```
+https://<your-username>.github.io/<repo-name>/
+```
+
+It usually goes live within 1–2 minutes. The URL appears at the top of the Pages settings page once ready.
+
+---
+
+### How the export works
+
+- Tree data is serialized from the database and **embedded directly** in `index.html` as `window.METRICS_TREE_PRELOADED`.  
+  The D3.js visualization detects this variable and skips the API fetch — so the page works with zero backend.
+- Fonts and D3.js are loaded from CDN (requires internet).
+- All app CSS and JS are copied locally into `docs/static/`.
+
+---
+
 ## Project Structure
 
 ```
-pm-metrics-tree/
+MetricsTree/
 ├── manage.py
 ├── requirements.txt
-├── pm_metrics_tree/         Django project config
+├── pm_metrics_tree/              Django project config
 │   ├── settings.py
 │   └── urls.py
-├── metrics/                 Main app
-│   ├── models.py            MetricNode (recursive tree)
-│   ├── views.py             Tree page + JSON API
-│   ├── admin.py             Admin config
-│   └── management/commands/seed_metrics.py
+├── metrics/                      Main app
+│   ├── models.py                 MetricNode (recursive tree)
+│   ├── views.py                  Tree page + JSON API
+│   ├── admin.py                  Admin config + Export button
+│   ├── export.py                 Static site export utility
+│   └── management/commands/
+│       ├── seed_metrics.py       Seed / re-seed the DB
+│       └── export_static.py      CLI export command
 ├── templates/
 │   ├── base.html
-│   └── metrics/tree.html
-└── static/
-    ├── css/styles.css       productdo.io color scheme
-    └── js/metrics_tree.js   D3.js v7 collapsible tree
+│   ├── metrics/tree.html
+│   └── admin/metrics/metricnode/
+│       └── change_list.html      Custom admin changelist (Export button)
+├── static/
+│   ├── css/styles.css            Dark theme styles
+│   └── js/metrics_tree.js        D3.js v7 collapsible tree
+└── docs/                         ← GitHub Pages output (git-tracked)
+    ├── index.html
+    └── static/
 ```
 
 ## Metrics Covered
